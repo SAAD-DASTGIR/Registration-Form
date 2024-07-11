@@ -1,0 +1,98 @@
+<div class="form">
+
+
+<div mat-dialog-title>
+    <h1 color="blue"> Registration Form </h1>
+</div>
+
+<form [formGroup]="empform" (ngSubmit)="onSubmit()">
+<div class="row">
+    <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" required="true" placeholder="Eg. Saad" formControlName="firstname">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" placeholder="Eg. Dastgir" formControlName="lastname">
+    </mat-form-field>
+</div>
+
+<div class="row">
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput required="true" type="email" placeholder="test@takdev.org" formControlName="email">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <mat-label>Date Of Birth</mat-label>
+        <input matInput [matDatepicker]="picker" required="true" formControlName="dob">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      
+</div>
+<div class="row">
+    <mat-radio-group aria-label="Select an option" required="true" formControlName="gender">
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">female</mat-radio-button>
+        <mat-radio-button value="others">Prefer not to say</mat-radio-button>
+      </mat-radio-group>      
+</div>
+<br>
+<div class="row">
+    <!-- <h4> </h4> -->
+<mat-form-field appearance="outline">
+  <mat-label>Qualification</mat-label>
+  <mat-select required="true" formControlName="education">
+    <mat-option *ngFor="let val of education" [value]="val">{{val}}</mat-option>
+    
+  </mat-select>
+</mat-form-field>
+
+<h4> </h4>
+<mat-form-field appearance="outline">
+  <mat-label>Company</mat-label>
+  <input matInput type="text" placeholder="takdev" type="text" formControlName="company">
+
+</mat-form-field>
+
+</div>
+<div class="row">
+    <mat-form-field appearance="outline">
+        <mat-label>Experience</mat-label>
+        <input matInput type="text" required="true" placeholder="Eg. 02" type="number" formControlName="experience">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <mat-label>Package</mat-label>
+        <input matInput type="text" placeholder="Eg. 100,000" type="number" formControlName="package">
+
+    </mat-form-field>
+
+   
+</div>
+<div class="row">
+    <mat-form-field appearance="outline">
+        <mat-label>CNIC</mat-label>
+        <input matInput color="primary" required="true" placeholder="xxxxxxxxxxxx" type="number" formControlName="cnic">
+
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput type="text" placeholder="Street # City # Country #" type="text" formControlName="address">
+
+    </mat-form-field>
+</div>
+
+<!-- <div mat-dialog-content></div> pending' add when datais loading-->
+<div mat-dialog-actions class="actions">
+    <button mat-raised-button color="warn" (click)="onClose()" >Cancel</button>
+    <button mat-raised-button type="reset">Reset</button>
+    <button mat-raised-button color="primary" type="submit" >Save</button>
+</div>
+</form>
+
+</div>

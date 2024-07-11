@@ -1,0 +1,49 @@
+{
+  "employee": [
+    {
+      "id": "d6a9",
+      "firstname": "Saad",
+      "lastname": "Dastgir",
+      "email": "msaaddastgir@gmail.com",
+      "education": "Graduation",
+      "dob": "2000-12-31T19:00:00.000Z",
+      "gender": "male",
+      "company": "Takdev",
+      "cnic": 1,
+      "address": "jcje",
+      "experience": "1",
+      "package": "1",
+      "action": ""
+    },
+    {
+      "id": "43f9",
+      "firstname": "asdasdadasd",
+      "lastname": "asdasdasda",
+      "email": "asdasdadasda",
+      "education": "Graduation",
+      "dob": "2024-07-10T19:00:00.000Z",
+      "gender": "male",
+      "company": "asdasdasdasd",
+      "cnic": 1231231231232,
+      "address": "1asdasdadasda",
+      "experience": "131231",
+      "package": "13123123",
+      "action": ""
+    },
+    {
+      "id": "1c42",
+      "firstname": "sdasdazxcczx",
+      "lastname": "zxcxzxzz",
+      "email": "zxczczxczxxc",
+      "education": "Intermiadiate",
+      "dob": "2024-07-16T19:00:00.000Z",
+      "gender": "male",
+      "company": "ASDASDASDASDASD",
+      "cnic": 123123123,
+      "address": "ADASDASD123",
+      "experience": "12321313",
+      "package": "12313123",
+      "action": ""
+    }
+  ]
+}
