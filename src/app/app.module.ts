@@ -22,6 +22,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HttpClient } from '@angular/common/http';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -35,7 +36,7 @@ import { HttpClient } from '@angular/common/http';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatToolbarModule,MatProgressSpinnerModule,
+    MatToolbarModule,MatProgressSpinnerModule,MatCardModule,
     MatIconModule,MatButtonModule,MatDialogModule,MatFormFieldModule,MatInputModule,
     MatDatepickerModule,MatNativeDateModule,MatRadioModule,MatSelectModule,ReactiveFormsModule,
     HttpClientModule,MatTableModule,MatPaginatorModule,MatSortModule,MatIconModule,MatExpansionModule

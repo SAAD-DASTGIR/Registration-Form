@@ -15,7 +15,7 @@ import { LocalStateService } from './service/localstateservice.service';
   // imports;[]
 })
 
-// --------------------------------------Using JsonServer BY Service Employee-------------------------------
+// --------------------------------------Using JsonServer for Service Employee-------------------------------
 // ----------------------------------------------------------------------------------------------------------
 
 // export class AppComponent implements OnInit{
@@ -101,6 +101,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource(employeeData);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    // console.log(this.loadEmployeeData())
   }
 
   applyFilter(event: Event) {
@@ -115,5 +116,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   deleteEmployee(cnic: number) {
     this._localStateService.deleteEmployee(cnic);
     this.loadEmployeeData();
+    // console.log(this.deleteEmployee(cnic))
   }
 }

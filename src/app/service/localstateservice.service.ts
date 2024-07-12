@@ -6,24 +6,29 @@ import { Injectable } from '@angular/core';
 export class LocalStateService {
   private employeeData: any[] = [];
 
-  constructor() {
-    this.loadFromLocalStorage();
+  // ------------------------HERE I SAVED DATA IN LOCAL STORAGE----------------------
+  // ---------------------------------------------------------------------------------
+  constructor() { 
+    // this.loadFromLocalStorage();
   }
 
-  private saveToLocalStorage() {
-    localStorage.setItem('employeeData', JSON.stringify(this.employeeData));
-  }
+  // private saveToLocalStorage() {
+  //   localStorage.setItem('employeeData', JSON.stringify(this.employeeData));
+  // }
 
-  private loadFromLocalStorage() {
-    const data = localStorage.getItem('employeeData');
-    if (data) {
-      this.employeeData = JSON.parse(data);
-    }
-  }
+  // private loadFromLocalStorage() {
+  //   const data = localStorage.getItem('employeeData');
+  //   if (data) {
+  //     this.employeeData = JSON.parse(data);
+  //   }
+  // }
+
+  // -------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------
 
   setEmployeeData(data: any[]) {
     this.employeeData = data;
-    this.saveToLocalStorage(); 
+    // this.saveToLocalStorage(); 
   }
 
   getEmployeeData() {
@@ -32,11 +37,11 @@ export class LocalStateService {
 
   addEmployee(employee: any) { // change interface after error goes
     this.employeeData.push(employee);
-    this.saveToLocalStorage();
+    // this.saveToLocalStorage();
   }
 
   deleteEmployee(cnic: number) {
     this.employeeData = this.employeeData.filter(emp => emp.cnic !== cnic);
-    this.saveToLocalStorage();
+    // this.saveToLocalStorage();
   }
 }

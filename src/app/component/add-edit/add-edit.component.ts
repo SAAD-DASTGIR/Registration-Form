@@ -44,12 +44,14 @@ export class AddEditComponent {
 
   onClose(): void {
     this._dialogueref.close();
+    console.log("form closed")
   }
 
   onSubmit() {
     if (this.empform.valid ) {
       this._localStateService.addEmployee(this.empform.value);
       this._dialogueref.close(true);
+      console.log(this.empform.value)
     }
   }
 }
