@@ -69,17 +69,32 @@ import { LocalStateService } from './service/localstateservice.service';
 // ------------------------------------------------------------------------------- // 
 // ------------------------------------------------------------------------------- //
 export class AppComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = [ 'firstname', 'lastname', 'dob', 'education', 'email', 'experience',
-    'cnic', 'address', 'company', 'package', 'gender','action'];
+  displayedColumns: string[] = [ 
+    'firstname', 
+    'lastname', 
+    'dob', 
+    'education', 
+    'email', 
+    'experience',
+    'cnic', 
+    'address', 
+    'company', 
+    'package', 
+    'gender',
+    'action'];
+
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _dialog: MatDialog, private _localStateService: LocalStateService) { }
+  constructor(
+    private _dialog: MatDialog, 
+    private _localStateService: LocalStateService) 
+  { }
 
   ngOnInit(): void {
-    this.loadEmployeeData();
+    // this.loadEmployeeData();
   }
 
   ngAfterViewInit(): void {
@@ -87,21 +102,28 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  openEditEmpForm() {
-    const dialogRef = this._dialog.open(AddEditComponent);
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
+  openEditEmpForm(data?: any) {
+    const dialogRef = this._dialog.open(AddEditComponent, {
+      data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (data) {
+          this._localStateService.editEmployee(data.cnic, result);
+        } else {
+          this._localStateService.addEmployee(result);
+        }
         this.loadEmployeeData();
       }
     });
   }
 
+ 
   loadEmployeeData() {
     const employeeData = this._localStateService.getEmployeeData();
     this.dataSource = new MatTableDataSource(employeeData);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    // console.log(this.loadEmployeeData())
   }
 
   applyFilter(event: Event) {
@@ -118,4 +140,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.loadEmployeeData();
     // console.log(this.deleteEmployee(cnic))
   }
+  editEmployee(cnic: number, data: any) {
+    this.openEditEmpForm(data);
+  }
+  
+ 
 }

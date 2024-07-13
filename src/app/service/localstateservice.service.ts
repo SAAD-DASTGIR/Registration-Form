@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LocalStateService {
-  private employeeData: any[] = [];
+  private employeeData: any[] = [
+    
+  ];
 
   // ------------------------HERE I SAVED DATA IN LOCAL STORAGE----------------------
   // ---------------------------------------------------------------------------------
@@ -44,4 +46,11 @@ export class LocalStateService {
     this.employeeData = this.employeeData.filter(emp => emp.cnic !== cnic);
     // this.saveToLocalStorage();
   }
+  editEmployee(cnic: number, updatedEmployee: any) {
+    const index = this.employeeData.findIndex(emp => emp.cnic === cnic);
+    if (index !== -1) {
+      this.employeeData[index] = updatedEmployee;
+    }
+  }
+  
 }

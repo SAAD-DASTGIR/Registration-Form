@@ -1,20 +1,21 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { Component, } from '@angular/core';
+import { Component, OnInit, inject, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { EmployeeService } from 'src/app/service/employee.service';
 import { LocalStateService } from 'src/app/service/localstateservice.service';
 
 
+
 @Component({
   selector: 'app-add-edit',
-  // imports;[MatRadioGroup,MatRadioButton],
+  // imports;[MatRadioGroup,MatRadioButton], add whn standalone fnc
   templateUrl: './add-edit.component.html',
   styleUrls: ['./add-edit.component.css'],
   
 })
-export class AddEditComponent {
+export class AddEditComponent implements OnInit{
   empform: FormGroup;
   education: string[] = [
     'Matric',
@@ -23,8 +24,19 @@ export class AddEditComponent {
     'Graduation',
     'Post Graduation'
   ];
-
-  constructor(private _fb: FormBuilder, private _localStateService: LocalStateService, private _dialogueref: MatDialogRef<AddEditComponent>) {
+  private data = inject(MAT_DIALOG_DATA);
+  ngOnInit(): void {
+    if (this.data) {
+      this.empform.patchValue(this.data);
+    }
+  }
+  constructor(    
+    private _fb: FormBuilder, 
+    private _localStateService: LocalStateService,     
+    private _dialogueref: MatDialogRef<AddEditComponent>,
+    ) 
+    
+    {
     this.empform = this._fb.group({
       
       firstname: '',
@@ -43,15 +55,14 @@ export class AddEditComponent {
   }
 
   onClose(): void {
+    
     this._dialogueref.close();
     console.log("form closed")
   }
 
   onSubmit() {
-    if (this.empform.valid ) {
-      this._localStateService.addEmployee(this.empform.value);
-      this._dialogueref.close(true);
-      console.log(this.empform.value)
+    if (this.empform.valid) {
+      this._dialogueref.close(this.empform.value); // Close the dialog and return form data
     }
   }
 }
