@@ -90,12 +90,28 @@ export class AddEditComponent implements OnInit {
     private _fb: FormBuilder,
     private _dialogueref: MatDialogRef<AddEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  )  {
+  )  
+  // {
+  //   this.empform = this._fb.group({
+  //     first_name: '',
+  //     last_name: '',
+  //     email: '',
+  //     qualification: '',  
+  //     DOB: '',
+  //     gender: '',
+  //     company: '',
+  //     cnic: '',
+  //     address: '',
+  //     experience: '',
+  //     package: '',
+  //   });
+  // }
+  {
     this.empform = this._fb.group({
       first_name: '',
       last_name: '',
-      email: '',
-      qualification: '',  // Changed from 'education' to 'qualification'
+      email: ['', [Validators.required, Validators.email]],
+      qualification: '',
       DOB: '',
       gender: '',
       company: '',

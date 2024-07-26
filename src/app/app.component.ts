@@ -177,7 +177,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
-    'firstname', 'lastname', 'dob', 'education', 'email', 'experience',
+    'first_name', 'last_name', 'DOB', 'qualification', 'email', 'experience',
     'cnic', 'address', 'company', 'package', 'gender', 'action'
   ];
   dataSource = new MatTableDataSource<any>();
