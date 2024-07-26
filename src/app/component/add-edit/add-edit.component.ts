@@ -1,4 +1,3 @@
-
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -22,8 +21,7 @@ export class AddEditComponent implements OnInit {
     private _fb: FormBuilder,
     private _dialogueref: MatDialogRef<AddEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  )  
-  {
+  ) {
     this.empform = this._fb.group({
       first_name: '',
       last_name: '',
@@ -38,7 +36,6 @@ export class AddEditComponent implements OnInit {
       package: '',
     });
   }
-  
 
   ngOnInit(): void {
     if (this.data) {
@@ -57,5 +54,4 @@ export class AddEditComponent implements OnInit {
       this._dialogueref.close(this.empform.value); // Close the dialog and return form data
     }
   }
-  
 }

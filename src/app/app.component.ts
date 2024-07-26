@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadEmployeeData();
+    this.loadEmployeeData(); 
   }
 
   ngAfterViewInit(): void {
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this._empService.getEmployeeData().subscribe((res: any) => {
       const data = res.data.map((item: any) => ({
         id: item.id,
-        ...item.attributes
+        ...item.attributes // because of data strapi gives and recieves
       }));
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;

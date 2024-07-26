@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmployeeService {
-  private apiUrl = 'http://localhost:1337/api/tables';  
+  private apiUrl = 'http://localhost:1337/api/tables';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getEmployeeData(): Observable<any> {
     return this.http.get(this.apiUrl);
@@ -17,7 +17,7 @@ export class EmployeeService {
   addEmployee(employee: any) {
     return this.http.post(this.apiUrl, { data: employee });
   }
-  
+
   deleteEmployeeData(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
