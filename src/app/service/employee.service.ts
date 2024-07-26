@@ -11,22 +11,18 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   getEmployeeData(): Observable<any> {
-    return this.http.get('http://localhost:1337/api/tables');
+    return this.http.get(this.apiUrl);
   }
-
 
   addEmployee(employee: any) {
-    return this.http.post('http://localhost:1337/api/tables', { data: employee });
+    return this.http.post(this.apiUrl, { data: employee });
   }
   
-
   deleteEmployeeData(id: number) {
-    return this.http.delete(`http://localhost:1337/api/tables/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
-  
 
   editEmployeeData(id: number, employee: any) {
-    return this.http.put(`http://localhost:1337/api/tables/${id}`, { data: employee });
+    return this.http.put(`${this.apiUrl}${id}`, { data: employee });
   }
-  
 }
