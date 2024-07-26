@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LocalStateService {
-  private employeeData: any[] = [
-    
-  ];
+export class LocalStateService implements OnInit {
+  private employeeData: any[] = [];
+ngOnInit(): any {
+  return this.employeeData
+}
 
   // ------------------------HERE I SAVED DATA IN LOCAL STORAGE----------------------
   // ---------------------------------------------------------------------------------
   constructor() { 
-    // this.loadFromLocalStorage();
+    // this.getEmployeeData()
+  
   }
 
   // private saveToLocalStorage() {
@@ -30,6 +32,7 @@ export class LocalStateService {
 
   setEmployeeData(data: any[]) {
     this.employeeData = data;
+    return this.employeeData
     // this.saveToLocalStorage(); 
   }
 

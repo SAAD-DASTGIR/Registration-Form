@@ -1,21 +1,32 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
+  private apiUrl = 'http://localhost:1337/api/tables';  
 
-  constructor(private _http:HttpClient) { }
-    addEmployee(data:any){
-      return this._http.post('http://localhost:3000/employee',data)
-    }
-    getEmployeeData(){
-      return this._http.get('http://localhost:3000/employee')
-    }
-    deleteEmployeeData(id:number){
-      return this._http.delete(`http://localhost:3000/employee/${id}`)
-    }
+  constructor(private http: HttpClient) { }
+
+  getEmployeeData(): Observable<any> {
+    return this.http.get('http://localhost:1337/api/tables');
+  }
+
+
+  addEmployee(employee: any) {
+    return this.http.post('http://localhost:1337/api/tables', { data: employee });
+  }
   
+
+  deleteEmployeeData(id: number) {
+    return this.http.delete(`http://localhost:1337/api/tables/${id}`);
+  }
+  
+
+  editEmployeeData(id: number, employee: any) {
+    return this.http.put(`http://localhost:1337/api/tables/${id}`, { data: employee });
+  }
   
 }
