@@ -23,6 +23,6 @@ export class EmployeeService {
   }
 
   editEmployeeData(id: number, employee: any) {
-    return this.http.put(`${this.apiUrl}${id}`, { data: employee });
+    return this.http.put(`${this.apiUrl}/${id}`, { data: employee });
   }
 }
