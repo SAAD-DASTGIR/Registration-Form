@@ -20,6 +20,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   totalRecords = 0; // default settings for server side pagination
   pageSize = 3;
   currentPage = 0;
+  filterValue = '';
+  sortField = '';
+  sortDirection = '';
+  sortOrder = '';
+
   dataSource1=new MatTableDataSource<any>() // datasource for pagination
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -37,6 +42,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.sort.sortChange.subscribe((sort: any) => { // sortChnge is available on MatTable DataSource
+      this.sortField = sort.active;
+      this.sortOrder = sort.direction;
+      this.loadEmployeeData();
+    });
   }
 
   openEditEmpForm(data?: any) { // edit data in dialogue box
@@ -55,8 +65,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   loadEmployeeData() { // setting the data of employee
-    this._empService.getEmployeeData(this.currentPage + 1, this.pageSize).subscribe((res: any) => { // how much data will be shown
-      const data = res.data.map((item: any) => ({
+    this._empService.getEmployeeData(this.currentPage + 1, this.pageSize, this.sortField, this.sortOrder,this.filterValue).subscribe((res: any) => {
+      const data = res.data.map((item: any) => ({ // load the whole dataset
         id: item.id,
         ...item.attributes
       }));
@@ -65,16 +75,13 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.totalRecords = res.meta.pagination.total; // load the records from server
       this.dataSource1.paginator = this.paginator; // load the paginator
       this.dataSource.sort = this.sort; // sort the data in the data source
-      console.log(`Data loaded for page ${this.currentPage + 1}`);
     });
   }
 
-  applyFilter(event: Event) { // filter for table
-    const filterValue = (event.target as HTMLInputElement).value; // as value is added or deleted in input event will be triggered
-    this.dataSource.filter = filterValue.trim().toLowerCase(); // remove spaces and change to lower case
-    if (this.dataSource.paginator) { // apply pagination on first page only
-      this.dataSource.paginator.firstPage();
-    }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.filterValue = filterValue.trim().toLowerCase(); // store filter as event passed from input
+    this.loadEmployeeData();
   }
 
   deleteEmployee(id: number) { // takes an id to delete the employeedata
@@ -94,7 +101,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   onPageChange(event: PageEvent) { // server side pagination
     this.pageSize = event.pageSize; // check for pagesize from fontend
     this.currentPage = event.pageIndex;
-    console.log(`Page changed to ${this.currentPage + 1}, Page size: ${this.pageSize}`);
     this.loadEmployeeData();
   }
 }
