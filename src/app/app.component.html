@@ -109,7 +109,10 @@
     </table>
 
     <mat-paginator
+      [length]="totalRecords"
+      [pageSize]="pageSize"
       [pageSizeOptions]="[3, 6, 9, 100]"
+      (page)="onPageChange($event)"
       aria-label="Select page of users"
     ></mat-paginator>
   </div>
